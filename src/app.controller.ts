@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -8,5 +8,16 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('/team5')
+  getHibIsAwesome(): string {
+    return this.appService.getHibIsAwesome();
+  }
+
+  @Get('/teapot')
+  @HttpCode(418)
+  get418(@Res({ passthrough: true }) res: any): string {
+    return this.appService.getStatusCodeFromRes(res);
   }
 }
